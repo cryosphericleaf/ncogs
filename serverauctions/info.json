@@ -1,0 +1,12 @@
+{
+    "author": ["nem"],
+    "install_msg": "This cog uses Discord threads to simulate auctions. Use `[p]help auction` to get started.",
+    "name": "ServerAuctions",
+    "short": "Server Auctions using Discord threads.",
+    "requirements": [],
+    "description": "Simulates auctions using Discord threads.\nActions can be created by an auctioneer or the bot owner.\n`[p]auction contract` to make someone an auctioneer.\nYou can also use Red's bank for managing auction funds.\n`[p]auction togglebank` to enable or disable Red's bank, By default, the bank is not used and any user can bid any amount.",
+    "tags": ["auctions"],
+    "min_bot_version": "3.5.0",
+    "min_python_version": [3, 10, 12],
+    "end_user_data_statement": "This cog does not store any user data except for user ids to track auctions"
+}

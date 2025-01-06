@@ -1,0 +1,12 @@
+{
+    "author": ["nem"],
+    "install_msg": "`[p]help invoke` `[p]help pipe` to get started.",
+    "name": "MultiCommands",
+    "short": "Run multiple commands from a single message.",
+    "requirements": [],
+    "description": "Run multiple commands from a single message.",
+    "tags": [],
+    "min_bot_version": "3.5.0",
+    "min_python_version": [3, 10, 12],
+    "end_user_data_statement": "This cog does not store any user data"
+}
