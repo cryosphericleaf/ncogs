@@ -21,7 +21,7 @@ class MultiCommands(commands.Cog):
         return True
 
     @commands.command()
-    async def invoke(self, ctx: commands.Context, delay: int = 0, *,commands_text: str):
+    async def invoke(self, ctx: commands.Context, *,commands_text: str):
         """
         Simply runs multiple commands in order separated by a newline.
 
