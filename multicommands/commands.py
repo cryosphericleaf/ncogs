@@ -5,6 +5,7 @@ from redbot.core import commands
 class MultiCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.active = set()  
 
     async def red_delete_data_for_user(self, **kwargs):
         """Nothing to delete"""
@@ -32,6 +33,10 @@ class MultiCommands(commands.Cog):
         [p]command2
         [p]command3```
         """
+        if ctx.author.id in self.active:
+            await ctx.send("You already have a commands running. Please wait until they finish.")
+            return
+        self.active.add(ctx.author.id)
         message = ctx.message
         commands = commands_text.split("\n")
 
@@ -43,6 +48,9 @@ class MultiCommands(commands.Cog):
             message.content = command_text
             await ctx.send(f"-# invoking `{message.content}`")
             await self.bot.process_commands(message)
+
+        self.active.remove(ctx.author.id)
+
 
     @commands.command()
     async def pipe(self, ctx: commands.Context, *,commands_text: str):
@@ -56,6 +64,10 @@ class MultiCommands(commands.Cog):
         [p]command2
         [p]command3```
         """
+        if ctx.author.id in self.active:
+            await ctx.send("You already have a commands running. Please wait until they finish.")
+            return
+        self.active.add(ctx.author.id)
 
         message = ctx.message
         commands = commands_text.split("\n")
@@ -79,4 +91,4 @@ class MultiCommands(commands.Cog):
             invoked_command = True
             last_message = ""
 
-    
+        self.active.remove(ctx.author.id)
