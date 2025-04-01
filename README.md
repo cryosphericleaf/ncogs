@@ -18,3 +18,5 @@ Cogs for a [Red Discord Bot](https://github.com/Cog-Creators/Red-DiscordBot)  v3
 multicommands: Run multiple commands from a message.
 
 serverauctions: Simulate auctions using Discord Threads.
+
+emojimanager: Add, remove emojis and track emoji usage.
