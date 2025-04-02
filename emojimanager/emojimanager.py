@@ -39,13 +39,15 @@ class EmojiManager(commands.Cog):
                 return
             emoji_url = emoji
         elif ctx.message.attachments:
-            if ctx.message.attachments[0].content_type.startswith("image"):
-                emoji_url = ctx.message.attachments[0].url
+            if not ctx.message.attachments[0].content_type.startswith("image"):
+                await ctx.send("invalid attachment.")
+                return
+            emoji_url = ctx.message.attachments[0].url
         elif emoji == None:
-            await ctx.send("Please provide a `image url or image attachment` as the `second argument.`")
+            await ctx.send("Please provide an `image url` as the `second argument` or an `image/gif attachment.`")
             return
-        if emoji_url == None:
-            await ctx.send("Please provide a `valid image attachement or image link or emoji`")
+        # if emoji_url == None:
+        #     await ctx.send("Please provide a `valid image attachement or image link or emoji`")
         try:
             image_data = await fetch_emoji(emoji_url)
             emoji = await ctx.guild.create_custom_emoji(name=name, image=image_data)
@@ -141,10 +143,23 @@ class EmojiManager(commands.Cog):
         await self.config.guild(ctx.guild).emoji_usage.set({})
         await ctx.send("Emoji stats have been reset.")
 
-    # @commands.command()
-    # @commands.has_permissions(manage_emojis = True)
-    # async def remove_inexisting_emojis_from_stats(self, ctx: commands.Context)
-    #     ...
+    @commands.command()
+    @commands.has_permissions(manage_emojis = True)
+    async def remove_non_existing_emojis_from_stats(self, ctx: commands.Context):
+        emoji_usage: dict = await self.config.guild(ctx.guild).emoji_usage()
+        existing_emojis = {f"<:{emoji.name}:{emoji.id}>" for emoji in ctx.guild.emojis}
+
+        items = tuple(emoji_usage.items())
+
+        for emoji_str, _ in items:
+            if emoji_str not in existing_emojis:
+                _ = emoji_usage.pop(emoji_str)
+
+        await self.config.guild(ctx.guild).emoji_usage.set(emoji_usage)
+        await ctx.send("done.")
+
+
+        
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
