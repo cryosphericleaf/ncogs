@@ -96,19 +96,6 @@ class EmojiManager(commands.Cog):
     async def getemoji(self, ctx: commands.Context, emoji: discord.Emoji):
         "Get emoji url"
         await ctx.send(emoji.url)
-
-    @commands.command()
-    async def listemojis(self, ctx: commands.Context):
-        "List the emojis of the server."
-        emojis = ""
-        for emoji in ctx.guild.emojis:
-            emojis += f"{emoji} `<:{emoji.name}:{emoji.id}>`\n"
-        if not emojis:
-            await ctx.send("This server currently has no emojis.")
-            return
-
-        pages = pagify(emojis)
-        await SimpleMenu(list(pages), disable_after_timeout=True).start(ctx)
     
     @commands.command()
     async def emojistats(self, ctx: commands.Context):
