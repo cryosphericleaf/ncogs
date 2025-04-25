@@ -1,0 +1,13 @@
+{
+    "author": ["nem"],
+    "install_msg": "[p]help IF to get started.",
+    "name": "MessageTriggers",
+    "short": "Dynamic auto responder",
+    "requirements": [],
+    "description": "...",
+    "hidden": true,
+    "tags": [],
+    "min_bot_version": "3.5.0",
+    "min_python_version": [3, 10, 12],
+    "end_user_data_statement": "This cog does not store any user data"
+}
